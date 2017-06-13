@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.main.autojob.dao.IAutoJobTimeDao">
+    
+	<sql id="autoJobTimeColumns">
+		a.id AS "id",
+		a.job_name AS "jobName",
+		a.description AS "description",
+		a.start_time AS "startTime",
+		a.create_by AS "createBy.id",
+		a.create_date AS "createDate",
+		a.update_by AS "updateBy.id",
+		a.update_date AS "updateDate"
+	</sql>
+	
+    
+	<select id="getJobTimeByName" resultType="com.main.autojob.model.AutoJobTime" parameterType="java.lang.String">
+		SELECT 
+			<include refid="autoJobTimeColumns"/>
+		FROM content_job_time a
+		<where>
+			<if test="jobName != null and jobName != ''">
+				AND a.job_name = #{jobName}
+			</if>
+		</where>
+	</select>
+	
+</mapper>

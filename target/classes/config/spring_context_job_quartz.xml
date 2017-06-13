@@ -31,15 +31,15 @@
 	</batch:job> 
 	
 	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="startupDelay" value="10" />
 		<property name="triggers">
-			<bean id="cronTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
-				<property name="jobDetail" ref="jobDetail" />
-				<property name="cronExpression" value="0/40 * * * * ?" />
-			</bean>
+			<list>
+			    <ref bean="studentMoveTrigger"/>
+			</list>
 		</property>
 	</bean>
 
-	<bean id="jobDetail" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+	<bean id="studentMoveJob" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
 		<property name="jobClass" value="com.scheduler.job.BatchDataSynJob" />
 		<property name="group" value="quartz-batch" />
 		<property name="durability" value="true" />
@@ -55,5 +55,10 @@
 		  </map>
 	    </property>
 	</bean>
-
+	
+	<bean id="studentMoveTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+			<property name="jobDetail" ref="studentMoveJob" />
+			<property name="cronExpression" value="0/40 * * * * ?" />
+	</bean>
+	
 </beans>
