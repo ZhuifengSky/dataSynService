@@ -14,7 +14,7 @@
 	</sql>
 	
     
-	<select id="getJobTimeByName" resultType="com.main.autojob.model.AutoJobTime" parameterType="java.lang.String">
+	<select id="getJobTimes" resultType="com.main.autojob.model.AutoJobTime" parameterType="com.main.autojob.model.AutoJobTime">
 		SELECT 
 			<include refid="autoJobTimeColumns"/>
 		FROM content_job_time a

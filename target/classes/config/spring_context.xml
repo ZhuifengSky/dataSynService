@@ -78,32 +78,33 @@
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>  
     </bean>  
     <!-- 事务配置 -->
- 	<bean id="transactionManager"
-		class="org.springframework.batch.support.transaction.ResourcelessTransactionManager" />
+ 	<bean id="txManager" class="org.springframework.batch.support.transaction.ResourcelessTransactionManager" />
+		
+	<!-- 声明事务 -->	
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	
 	<!-- 定义事务开启的方法 -->
 	<tx:advice id="txAdvice" transaction-manager="transactionManager">
 		<tx:attributes>
 			<tx:method name="load*" read-only="true" rollback-for="Exception" />
 			<tx:method name="add*" propagation="REQUIRED" rollback-for="Exception" />
-			<tx:method name="save*" propagation="REQUIRED"
-				rollback-for="Exception" />
+			<tx:method name="save*" propagation="REQUIRED" rollback-for="Exception" />
 			<tx:method name="del*" propagation="REQUIRED" rollback-for="Exception" />
-			<tx:method name="update*" propagation="REQUIRED"
-				rollback-for="Exception" />
+			<tx:method name="update*" propagation="REQUIRED" rollback-for="Exception" />
 			<tx:method name="get*" read-only="true" rollback-for="Exception" />
 			<tx:method name="find*" read-only="true" rollback-for="Exception" />
 		</tx:attributes>
 	</tx:advice>
 	<!-- 事务层级的声明 -->
 	<aop:config>
-		<aop:pointcut id="BussessServiceOperation"
-			expression="execution(public * *..service..*.*(..))" />
+		<aop:pointcut id="BussessServiceOperation" expression="execution(public * *..service..*.*(..))" />
 		<aop:advisor advice-ref="txAdvice" pointcut-ref="BussessServiceOperation" />
 	</aop:config>
 	
 	<!--Spring Batch批处理配置  -->
-	 <bean id="jobRepository"
-        class="org.springframework.batch.core.repository.support.JobRepositoryFactoryBean">
+	 <bean id="jobRepository" class="org.springframework.batch.core.repository.support.JobRepositoryFactoryBean">
         <property name="dataSource" ref="dataSource" />
         <property name="transactionManager" ref="transactionManager" />
         <property name="databaseType" value="mysql" />
@@ -111,22 +112,19 @@
 
        
 	
-    <bean id="jobLauncher"
-        class="org.springframework.batch.core.launch.support.SimpleJobLauncher">
+    <bean id="jobLauncher" class="org.springframework.batch.core.launch.support.SimpleJobLauncher">
         <property name="jobRepository" ref="jobRepository" />
     </bean>
     <!-- Must set this -->
-	<bean
-		class="org.springframework.batch.core.configuration.support.JobRegistryBeanPostProcessor">
+	<bean class="org.springframework.batch.core.configuration.support.JobRegistryBeanPostProcessor">
 		<property name="jobRegistry" ref="jobRegistry" />
 	</bean>
 
-	<bean id="jobRegistry"
-		class="org.springframework.batch.core.configuration.support.MapJobRegistry" />
+	<bean id="jobRegistry" class="org.springframework.batch.core.configuration.support.MapJobRegistry" />
     
     <!-- 初次时创建batch依赖的表 -->
-    <jdbc:initialize-database data-source="dataSource">
+    <!-- <jdbc:initialize-database data-source="dataSource">
         <jdbc:script location="classpath:org/springframework/batch/core/schema-drop-mysql.sql" />
         <jdbc:script location="classpath:org/springframework/batch/core/schema-mysql.sql" />
-    </jdbc:initialize-database>
+    </jdbc:initialize-database> -->
 </beans>

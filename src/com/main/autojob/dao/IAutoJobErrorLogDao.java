@@ -1,6 +1,8 @@
 package com.main.autojob.dao;
 
 
+import org.springframework.stereotype.Repository;
+
 import com.main.autojob.model.AutoJobErrorLog;
 
 /**
@@ -8,6 +10,7 @@ import com.main.autojob.model.AutoJobErrorLog;
  * @author pc-zw
  *
  */
+@Repository
 public interface IAutoJobErrorLogDao {
 
 	/**

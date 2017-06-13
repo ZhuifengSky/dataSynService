@@ -9,8 +9,16 @@ import java.io.Serializable;
 public class AutoJobErrorLog implements Serializable{
 
 	private static final long serialVersionUID = 1L;
+	private String id;
 	private String jobName;		// 任务名称
 	private String errorMsg;		// 错误信息
+	
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
 	public String getJobName() {
 		return jobName;
 	}

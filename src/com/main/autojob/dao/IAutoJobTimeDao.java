@@ -2,6 +2,8 @@ package com.main.autojob.dao;
 
 import java.util.List;
 
+import org.springframework.stereotype.Repository;
+
 import com.main.autojob.model.AutoJobTime;
 
 /**
@@ -9,12 +11,13 @@ import com.main.autojob.model.AutoJobTime;
  * @author pc-zw
  *
  */
+@Repository
 public interface IAutoJobTimeDao {
 
 	/**
 	 * 根据job名称或者job上次截止时间
-	 * @param jobName
+	 * @param jobTime
 	 * @return
 	 */
-	public List<AutoJobTime> getJobTimeByName(String jobName);
+	public List<AutoJobTime> getJobTimes(AutoJobTime jobTime);
 }

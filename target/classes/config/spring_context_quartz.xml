@@ -2,9 +2,7 @@
 <!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN 2.0//EN" "http://www.springframework.org/dtd/spring-beans-2.0.dtd">
 <beans>
 
-	<bean id="scheduler"
-		class="org.springframework.scheduling.quartz.SchedulerFactoryBean"
-		lazy-init="false">
+	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean" lazy-init="false">
 		<property name="startupDelay" value="10" />
 		<property name="triggers">
 			<list>
@@ -15,15 +13,16 @@
 	</bean> 
 	 
 	<!-- 定时问好 --> 
-	<bean name="sayHelloJob" class="org.springframework.scheduling.quartz.JobDetailFactoryBean" 
-			lazy-init="default" autowire="default" dependency-check="default">
-	    <property name="jobClass" value="com.scheduler.job.StudentSynJob" />
-    </bean>
+	<bean name="sayHelloJob" class="com.scheduler.job.StudentSynJob"/>
+	<bean id="sayHelloJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="sayHelloJob" />
+		<property name="targetMethod" value="studentDataSyn" />
+		<property name="concurrent" value="false" /> 
+	</bean>
+	  
 	<bean id="sayHelloTirgger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean" 
 			lazy-init="default" autowire="default" dependency-check="default">
-	  <property name="jobDetail" ref="sayHelloJob" /> 
+	  <property name="jobDetail" ref="sayHelloJobDetail" /> 
 	  <property name="cronExpression" value="0/20 * * * * ?" />    
 	</bean>
-	
-	
 </beans>
