@@ -33,11 +33,9 @@ public class StudentSynJob {
 		System.out.println("学员同步");
 		List<AutoJobTime> jobTimes =  autoJobTimeServiceImpl.getJobTimeByName(jobName);
 		if (jobTimes!=null && jobTimes.size()==1) {
-			
+			System.out.println("拿到时间"+jobTimes.get(0).getJobName());
 		}else{
-			AutoJobErrorLog errorLog = new AutoJobErrorLog();
-			errorLog.setJobName(jobName);
-			errorLog.setErrorMsg("未查到任务studentSyn的业务时间或者存在多个!");
+			AutoJobErrorLog errorLog = new AutoJobErrorLog(jobName,"未查到任务studentSyn的业务时间或者存在多个!");
 			autoJobErrorLogServiceImpl.saveJobErrorLog(errorLog );
 		}
 	}

@@ -24,7 +24,7 @@ import org.springframework.scheduling.quartz.QuartzJobBean;
 public class BatchDataSynJob extends QuartzJobBean {
 
 	
-	  static final String JOB_NAME = "jobName";
+	  private static final String JOB_NAME = "jobName";
 
 	  private JobLocator jobLocator;
 
