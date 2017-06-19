@@ -1,13 +1,13 @@
 package com.scheduler.job;
 
+import java.util.Date;
 import java.util.List;
 
 import org.apache.log4j.Logger;
-import org.quartz.JobExecutionContext;
-import org.quartz.JobExecutionException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.quartz.QuartzJobBean;
 
+import com.common.util.DateUtil;
+import com.common.util.EnvironmentUtil;
 import com.main.autojob.model.AutoJobErrorLog;
 import com.main.autojob.model.AutoJobTime;
 import com.main.autojob.service.IAutoJobErrorLogService;
@@ -24,23 +24,33 @@ public class StudentSynJob {
 	private IAutoJobTimeService autoJobTimeServiceImpl;
 	@Autowired
 	private IAutoJobErrorLogService autoJobErrorLogServiceImpl;
-	
+	private static EnvironmentUtil util = new EnvironmentUtil();
 	private static String jobName = "studentSyn";
-	private Logger log;
+	private static Logger log = Logger.getLogger(StudentSynJob.class);;
 
-	protected void studentDataSyn()
-			throws JobExecutionException {
-		System.out.println("学员同步");
-		List<AutoJobTime> jobTimes =  autoJobTimeServiceImpl.getJobTimeByName(jobName);
-		if (jobTimes!=null && jobTimes.size()==1) {
-			System.out.println("拿到时间"+jobTimes.get(0).getJobName());
-		}else{
-			AutoJobErrorLog errorLog = new AutoJobErrorLog(jobName,"未查到任务studentSyn的业务时间或者存在多个!");
-			autoJobErrorLogServiceImpl.saveJobErrorLog(errorLog );
-		}
+	protected void studentDataSyn(){
+			List<AutoJobTime> jobTimes =  autoJobTimeServiceImpl.getJobTimeByName(jobName);
+			if (jobTimes!=null && jobTimes.size()==1) {
+				AutoJobTime jobTime = jobTimes.get(0);
+				String serviceStartTime =jobTime.getStartTime();
+				String serviceEndTime = util.getPropertyValue("service.endTime");						
+				//任务逻辑
+				
+				
+				
+				//最后更新任务业务时间
+				jobTime.setStartTime(serviceEndTime);
+				jobTime.setUpdateBy(util.getPropertyValue("jobTime.update.id"));
+				jobTime.setUpdateDate(DateUtil.format(new Date(), DateUtil.BOTH));
+				autoJobTimeServiceImpl.upJobTime(jobTime);							
+			}else{
+				AutoJobErrorLog errorLog = new AutoJobErrorLog(jobName,"未查到任务studentSyn的业务时间或者存在多个!");
+				autoJobErrorLogServiceImpl.saveJobErrorLog(errorLog );
+			}
 	}
-
-	
 	  
 
+	public static void main(String[] args) {
+		log.error("记录错误信息");
+	}
 }

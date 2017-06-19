@@ -18,7 +18,7 @@ public class StudentInfoWriter implements ItemWriter<StudentInfo>{
 		System.out.println("到写操作啦");
 		System.out.println("拿到要存的数据");
 		for (StudentInfo studentInfo : items) {
-			System.out.println(studentInfo.getId()+"---"+studentInfo.getUserName());
+			System.out.println(studentInfo.getUid()+"---"+studentInfo.getuName());
 		}
 		
 	}

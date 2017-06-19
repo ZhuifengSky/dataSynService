@@ -14,7 +14,7 @@ public class StudentInfoProcessor implements ItemProcessor<StudentInfo, StudentI
 	@Override
 	public StudentInfo process(StudentInfo item) throws Exception {
 		System.out.println("数据处理层");
-		System.out.println("拿到用户"+item.getId()+"----"+item.getUserName());
+		System.out.println("拿到用户"+item.getUid()+"----"+item.getuName());
 		return item;
 	}
 

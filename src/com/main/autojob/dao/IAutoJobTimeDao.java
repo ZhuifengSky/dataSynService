@@ -20,4 +20,11 @@ public interface IAutoJobTimeDao {
 	 * @return
 	 */
 	public List<AutoJobTime> getJobTimes(AutoJobTime jobTime);
+	
+	/**
+	 * 更新自动任务上次业务时间
+	 * @param jobTime
+	 * @return
+	 */
+	public int updateJobTime(AutoJobTime jobTime);
 }

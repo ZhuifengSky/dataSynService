@@ -3,7 +3,7 @@
 <beans>
 
 	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean" lazy-init="false">
-		<property name="startupDelay" value="10" />
+		<property name="startupDelay" value="20" />
 		<property name="triggers">
 			<list>
 			<!-- 定时问好 -->
@@ -23,6 +23,6 @@
 	<bean id="sayHelloTirgger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean" 
 			lazy-init="default" autowire="default" dependency-check="default">
 	  <property name="jobDetail" ref="sayHelloJobDetail" /> 
-	  <property name="cronExpression" value="0/20 * * * * ?" />    
+	  <property name="cronExpression" value="0 0/3 * * * ?" />    
 	</bean>
 </beans>

@@ -19,8 +19,8 @@ public class StudentInfoMapper implements RowMapper<StudentInfo>{
 @Override
 public StudentInfo mapRow(ResultSet rs, int rowNum) throws SQLException {
 	StudentInfo s = new  StudentInfo();   
-	s.setUserName(rs.getString("STUDENTNAME" ));
-	s.setId(Long.parseLong(rs.getString("id")));
+	s.setuName(rs.getString("STUDENTNAME"));
+	s.setUid(Long.parseLong(rs.getString("id")));
      return  s;        
 }
 

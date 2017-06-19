@@ -17,4 +17,11 @@ public interface IAutoJobTimeService {
 	 * @return
 	 */
 	public List<AutoJobTime> getJobTimeByName(String jobName);
+	
+	/**
+	 * 更新上次业务时间
+	 * @param jobTime
+	 * @return
+	 */
+	public int upJobTime(AutoJobTime jobTime);
 }

@@ -25,4 +25,15 @@
 		</where>
 	</select>
 	
+	<update id="updateJobTime" parameterType="com.main.autojob.model.AutoJobTime"> 
+		UPDATE content_job_time SET 	
+			job_name = #{jobName},
+			description = #{description},
+			start_time = #{startTime},
+			update_by = #{updateBy},
+			update_date = #{updateDate}
+		WHERE id = #{id}
+	</update>
+	
+	
 </mapper>

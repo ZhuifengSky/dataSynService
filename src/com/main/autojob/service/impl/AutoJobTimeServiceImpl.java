@@ -29,5 +29,10 @@ public class AutoJobTimeServiceImpl implements IAutoJobTimeService{
 		AutoJobTime jobTime = new AutoJobTime();
 		jobTime.setJobName(jobName);
 		return jobTimeDao.getJobTimes(jobTime);		
+	}
+
+	@Override
+	public int upJobTime(AutoJobTime jobTime) {	
+		return jobTimeDao.updateJobTime(jobTime);
 	};
 }

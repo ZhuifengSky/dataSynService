@@ -6,70 +6,58 @@ package com.main.student.model;
  */
 public class StudentInfo {
 
-	private Long id;			//用户ID
-	private String userName;    //用户名
-	private String name;        //用户昵称
-	private String address;		//地址
-	private String mobile;		//手机号
-	private String md5mobile;	//手机号MD5
-	private Integer channelId;  //渠道ID
-	private String addTime;     //注册时间
-	private Integer sourceType; //来源
+	private Long uid;			//用户ID
+	private String uName;    //用户名
+	private String nickName;        //用户昵称
+	private String phone;		//手机号
+	private Integer chId;  //渠道ID
+	private String regTime;     //注册时间
+	private Integer srcType; //来源
 	
-	public Long getId() {
-		return id;
+	public Long getUid() {
+		return uid;
 	}
-	public void setId(Long id) {
-		this.id = id;
+	public void setUid(Long uid) {
+		this.uid = uid;
 	}
-	public String getUserName() {
-		return userName;
+	public String getuName() {
+		return uName;
 	}
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setuName(String uName) {
+		this.uName = uName;
 	}
-	public String getName() {
-		return name;
+	public String getNickName() {
+		return nickName;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setNickName(String nickName) {
+		this.nickName = nickName;
 	}
-	public String getAddress() {
-		return address;
+	public String getPhone() {
+		return phone;
 	}
-	public void setAddress(String address) {
-		this.address = address;
+	public void setPhone(String phone) {
+		this.phone = phone;
 	}
-	public String getMobile() {
-		return mobile;
+	public Integer getChId() {
+		return chId;
 	}
-	public void setMobile(String mobile) {
-		this.mobile = mobile;
+	public void setChId(Integer chId) {
+		this.chId = chId;
 	}
-	public String getMd5mobile() {
-		return md5mobile;
+	public String getRegTime() {
+		return regTime;
 	}
-	public void setMd5mobile(String md5mobile) {
-		this.md5mobile = md5mobile;
+	public void setRegTime(String regTime) {
+		this.regTime = regTime;
 	}
-	public Integer getChannelId() {
-		return channelId;
+	public Integer getSrcType() {
+		return srcType;
 	}
-	public void setChannelId(Integer channelId) {
-		this.channelId = channelId;
+	public void setSrcType(Integer srcType) {
+		this.srcType = srcType;
 	}
-	public String getAddTime() {
-		return addTime;
-	}
-	public void setAddTime(String addTime) {
-		this.addTime = addTime;
-	}
-	public Integer getSourceType() {
-		return sourceType;
-	}
-	public void setSourceType(Integer sourceType) {
-		this.sourceType = sourceType;
-	}
+	
+	
 	
 	
 	
